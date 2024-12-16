@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot V7</title>
+  </head>
+  <body>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: clamp(350px, 100vh, 3500px);
+        overflow: hidden;
+        margin: 0;
+      }
+      #chatbox {
+        color: #ffa73c;
+        background-color: lightblue;
+        width: clamp(200px, 60vw, 2000px);
+        height: clamp(300px, 90vh, 3000px);
+        position: relative;
+      }
+      #chat {
+        overflow-y: auto;
+        height: 90%;
+        font-size: clamp(10px, 3vh, 200px);
+      }
+      #userInput {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 8%;
+        width: 79%;
+        color: #ffa73c;
+        background: #c2dee7;
+        font-size: clamp(10px, 2vh, 150px);
+      }
+      button {
+        width: 20%;
+        position: absolute;
+        left: 80%;
+        height: 9%;
+        bottom: 0;
+      }
+    </style>
+    <div id="chatbox">
+      <div id="chat"></div>
+      <input type="text" id="userInput" placeholder="Entrez une question." />
+      <button onclick="sendMessage()">Envoyer</button>
+    </div>
+    <script>
+      const userInput = document.getElementById('userInput');
+      const data = {
+        context: {
+          user: null,
+          bot: null,
+        },
+        responses: {
+          context: {
+            user: {
+              bonjour: ['je vais bien', 'ça va', 'ca va'],
+            },
+          },
+          bonjour: 'bonjour comment allez-vous ?',
+        },
+      };
+      function sendMessage() {
+        const userMsg = userInput.value.toLowerCase();
+        let botResponse = 'Je suis désolé je ne comprends pas';
+        if (!data.context) {
+          if (userMsg.includes(data.responses[userMsg])) {
+            botResponse = data.responses[userMsg];
+            data.context.bot = botResponse;
+            data.context.user = userMsg;
+          }
+        } else if (data.context) {
+          if (response.context.user.forEach((response) => {
+            if (userMsg[response]) {
+
+            }
+          })) {
+            botResponse = data.responses[userMsg];
+            data.context.bot = botResponse;
+            data.context.user = userMsg;
+          }
+        }
+        displayMessage(
+          `${userMsg.charAt(0).toUpperCase()}${userMsg.slice(1).toLowerCase()}`,
+          'Vous'
+        );
+        setTimeout(() => {
+          displayMessage(
+            `
+            ${botResponse.charAt(0).toUpperCase()}${botResponse
+              .slice(1)
+              .toLowerCase()}`,
+            'bot'
+          );
+        }, 1000);
+      }
+      function displayMessage(message, sender) {
+        const p = document.createElement('p');
+        p.textContent = `${(sender, message)}`;
+        chat.appendChild(p);
+      }
+    </script>
+  </body>
+</html>
